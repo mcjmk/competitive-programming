@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
- 
+
 long long MOD = 1000000007LL;
  
 long long modpow(long long x, long long n){
@@ -12,11 +12,15 @@ long long modpow(long long x, long long n){
 }
  
 int main() {
+    cin.tie(0);
+	cout.tie(0);
+	ios_base::sync_with_stdio(0);
+	
 	int n;
 	cin>>n; 
 	
 	long long a,b;
-	for (int i=0; i<n; i++){
+	while(n--){
 		cin>>a>>b;
 	    cout<<modpow(a,b)<<"\n";
 	}

@@ -1,51 +1,47 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int N = 1e5+3;
+const int N = 3e5+6;
 const int INF = 1e9;
 
-vector<int>G[3 * N];
-int dis[3 * N];
-bool processed[3 * N];
+vector<int>G[N];
+int dis[N];
 
-void dijkstra(int x, int n){
-    for (int i=1; i<=n; i++) dis[i] = INF;
-    priority_queue<pair<int, int>>q;
-    dis[x] = 0;
-    q.push({0, x});
-    while (!q.empty()){
-        int a = q.top().second; q.pop();
-        if (processed[a]) continue;
-        processed[a] = true;
-        for (auto g : G[a]){
-            int b = g, w = 1;
-            if (dis[a] + w < dis[b]){ 
-                dis[b] = dis[a] + w;
-                q.push({-dis[b], b});
-            }
-        }
-    }
+void bfs(int x, int G_size){
+    for (int i=1; i<=G_size; i++) dis[i] = INF;
+	dis[x]=0;
+	queue<int> q;
+	q.push(x);
+	while (!q.empty()){
+		int u = q.front(); q.pop();
+		for (auto v: G[u]){
+			if (dis[v] != INF) continue;
+			dis[v] = dis[u] + 1;
+			q.push(v);
+		}
+	}
 }
 
 int main(){
-    cin.tie(0);
+	cin.tie(0);
 	cout.tie(0);
 	ios_base::sync_with_stdio(0);
-    
+
     int n, m;
     cin >> n >> m;
     
     int a, b;
     for (int i=0; i<m; i++){
         cin >> a >> b;
-        G[a].push_back(b + n * 1);
-        G[a + n * 1].push_back(b + n * 2);
-        G[a + n * 2].push_back(b);
-        }
+        G[a].push_back(n + b);
+        G[n + a].push_back(2 * n + b);
+        G[2* n + a].push_back(b);
+    }
     
     int S, T;
     cin >> S >> T;
 
-    dijkstra(S, 3 * n + 3); 
-    cout << (dis[T] == INF ? -1 : dis[T] / 3);
+    bfs(S, 3*n + 3); 
+    cout << (dis[T] == INF ? -1 : (dis[T] / 3));
+
 }

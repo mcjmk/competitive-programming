@@ -21,7 +21,6 @@ void UNION(int a, int b, int which){
     SIZE[a][which] += SIZE[b][which];
 }
 
-
 int main(){
 	cin.tie(0);
 	cout.tie(0);
@@ -46,8 +45,7 @@ int main(){
        UNION(r, s, 1); 
     }
 
-    map<pair<int, int>, int>m;
-    
+    map<pair<int, int>, int>m;    
     for (int i=1; i<=n; i++)
         m[{FIND(i,0), FIND(i,1)}] += 1;
     

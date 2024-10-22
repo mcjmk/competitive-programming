@@ -9,23 +9,23 @@ int dis[N];
 
 void bfs(int x, int G_size){
     for (int i=1; i<=G_size; i++) dis[i] = INF;
-	dis[x]=0;
-	queue<int> q;
-	q.push(x);
-	while (!q.empty()){
-		int u = q.front(); q.pop();
-		for (auto v: G[u]){
-			if (dis[v] != INF) continue;
-			dis[v] = dis[u] + 1;
-			q.push(v);
-		}
-	}
+        dis[x]=0;
+        queue<int> q;
+        q.push(x);
+        while (!q.empty()){
+            int u = q.front(); q.pop();
+            for (auto v: G[u]){
+                if (dis[v] != INF) continue;
+                dis[v] = dis[u] + 1;
+                q.push(v);
+            }
+        }
 }
 
 int main(){
-	cin.tie(0);
-	cout.tie(0);
-	ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    ios_base::sync_with_stdio(0);
 
     int n, m;
     cin >> n >> m;
